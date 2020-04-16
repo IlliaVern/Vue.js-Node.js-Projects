@@ -1,0 +1,59 @@
+<label>Search book by:</label><br>
+<!-- <form method="post"> -->
+<form action="/books/filter" method="get">
+
+   <div>
+    <label>Author<input type="text" name="author"></label><br>
+    <label>Year<input type="text" name="year"></label>
+      <!-- <label><input type="radio" name="searchBy" value="author">Author</label>
+      <label><input type="radio" name="searchBy" value="year">Year</label> -->
+   </div><br>
+   <!-- <input type="text" name="searchWord"><br><br> -->
+   <input type="submit" value="Search book">
+</form>
+
+<% let i=0
+for(book of books){ %>
+<div>Book title: <%=book.title%></div>
+<div>Written by: <%=book.author%></div>
+<div>Year: <%=book.year%></div>
+<a href="/books/edit/<%= i++ %>">Edit</a>
+<%}%>
+
+<!-- <script>
+// Пример отправки POST запроса:https://developer.mozilla.org/ru/docs/Web/API/Fetch_API/Using_Fetch
+async function postData(url = '', data = {}) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *client
+    body: JSON.stringify(data) // body data type must match "Content-Type" header
+  });
+  return await response.json(); // parses JSON response into native JavaScript objects
+}
+
+function onSubmit(event) {
+    // отменяем стандартное поведение кнопки Submit (дублирует POST)
+    event.preventDefault()
+
+    postData('/books/filter', { 
+      searchBy: document.querySelector('input[name="searchBy"]:checked').value, 
+      searchWord: document.forms[0].searchWord.value
+ })
+  .then((data) => {
+      if (data.success) {
+        document.getElementById('msg').innerText = data.msg
+      }
+    else
+        document.getElementById('msg').innerText = data.err.msg
+  });
+}
+</script> -->

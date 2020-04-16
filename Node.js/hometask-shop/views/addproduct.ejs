@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title>Add product</title>
+</head>
+
+<body>
+    <header>
+        <h2>Welcome to <%= shopName %></h2><br>
+        <nav>
+            <a href="/">Home page</a>
+            <a href="/products">Products</a>
+            <a href="/addproduct">Add product</a>
+            <a href="/about">About</a>
+        </nav>
+    </header>
+    <h3>Add some product</h3><br>
+    <form action="/data" method="post">
+        Title:<input type="text" placeholder="Enter product title" name="productTitle"><br>
+        Price:<input type="number" placeholder="Enter product price" name="productPrice"><br>
+        Description:<input type="text" placeholder="Enter product description" name="productDescription"><br>
+        <input type="submit" value="Add">
+    </form>
+</body>
+
+</html>

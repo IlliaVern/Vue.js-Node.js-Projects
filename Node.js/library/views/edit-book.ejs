@@ -1,0 +1,57 @@
+<form method="post">
+    <label>Book id </label><label id="bookId"><%= id %> </label> 
+    <label>
+        Title <input type="text" name="title" value="<%= books[`${id}`].title %>">
+    </label>
+    <label>
+        Author <input type="text" name="author" value="<%= books[`${id}`].author %>">
+    </label>
+    <label>
+        Year <input type="number" name="year" value="<%= books[`${id}`].year %>">
+    </label>
+    <input type="submit" value="Save book">
+</form>
+    <div id="msg"></div>
+<script>
+    // Пример отправки POST запроса:https://developer.mozilla.org/ru/docs/Web/API/Fetch_API/Using_Fetch
+    async function postData(url = '', data = {}) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *client
+    body: JSON.stringify(data) // body data type must match "Content-Type" header
+  });
+  return await response.json(); // parses JSON response into native JavaScript objects
+}
+
+function onSubmit(event) {
+    // отменяем стандартное поведение кнопки Submit (дублирует POST)
+    event.preventDefault()
+
+    postData('/books/edit', { 
+    id: document.getElementById("bookId").innerText,
+    title: document.forms[0].title.value,
+    author: document.forms[0].author.value,
+    year: document.forms[0].year.value
+ })
+  .then((data) => {
+      if (data.success) {
+        document.getElementById('msg').innerText = data.msg
+      }
+    else
+        document.getElementById('msg').innerText = data.err.msg
+  });
+}
+
+window.onload = function(){
+    document.querySelector('[type = "submit"]').onclick = onSubmit
+}
+</script>
