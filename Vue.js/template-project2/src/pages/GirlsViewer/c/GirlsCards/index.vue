@@ -1,29 +1,29 @@
 <template>
   <div class="columns">
-    <div v-for="girl in girls" :key="girl.id" class="column is-one-fifth">
+    <div v-for="girl in girls" :key="girl.id" class="card column">
       <girl-card :girl="girl" />
     </div>
   </div>
 </template>
 
 <script>
-import store from "@/store";
 import GirlCard from "./c/GirlCard";
+import { mapActions, mapGetters } from "vuex";
+// import store from "@/store";                        // було
 export default {
   name: "GirlsCards",
   components: {
     GirlCard
   },
-  methods: {
-    deleteGirl(girlId) {
-      this.girls = store.deleteGirl(girlId);
-      this.girls = store.readGirls();
-    }
-  },
+  
   computed: {
+    ...mapGetters("girls", ["getGirlsList"]),
     girls() {
-      return store.readGirls();
+      return this.getGirlsList();
     },
+    // girls() {                                         // було
+    //   return store.loadGirlsList();
+    // },
   },
 };
 </script>

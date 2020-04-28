@@ -32,7 +32,9 @@
 </template>
 
 <script>
-import store from "@/store";
+// import store from "@/store";
+import {mapActions} from "vuex"
+
 export default {
   name: "GirlCard",
   props: {
@@ -41,17 +43,12 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      girls: []
-    };
-  },
-  computed: {
-  },
+  
   methods: {
+    ...mapActions("girls", ["deleteGirl"]),
+
     deleteGirl(girlId) {
-      this.girls = store.deleteGirl(girlId);
-      this.girls = store.readGirls();
+      this.girls = this.deleteGirl(girlId);
     }
   }
 };

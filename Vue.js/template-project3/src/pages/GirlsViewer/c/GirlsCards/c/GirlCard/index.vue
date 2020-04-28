@@ -1,5 +1,5 @@
 <template>
-  <div class="card has-max-width-400">
+  <div class="card has-max-width-300">
     <div class="card-image">
       <figure class="image is-1by">
         <img src="https://bulma.io/images/placeholders/256x256.png" alt="Card image">

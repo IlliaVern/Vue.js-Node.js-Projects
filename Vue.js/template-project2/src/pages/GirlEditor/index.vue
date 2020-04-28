@@ -22,13 +22,8 @@
     </b-field>
 
     <b-field horizontal label="Description">
-      <b-input
-        type="textarea" maxlength="128"
-        placeholder="Enter description"
-        v-model="description"
-        required
-        expanded
-      ></b-input>
+      <b-input type="textarea" maxlength="128" placeholder="Enter description"
+        v-model="description" required expanded></b-input>
     </b-field>
 
     <div class="buttons is-centered">
@@ -39,7 +34,8 @@
 </template>
 
 <script>
-import store from "@/store";
+// import store from "@/store"; //було
+import {mapActions} from "vuex"
 
 export default {
   name: "GirlEditor",
@@ -65,9 +61,10 @@ export default {
     }
   },
   methods: {
+    ...mapActions("girls", ["addGirl", "updateGirl", "findGirlById"]),
     saveGirl() {
       if (this.girlId) {
-        store.updateGirl({
+        this.updateGirl({
           id: this.girlId,
           name: this.name,
           age: this.age,
@@ -76,7 +73,7 @@ export default {
           description: this.description
         });
       } else {
-        store.addGirl(this.name, this.age, this.ethnic, this.children, this.description);
+        this.addGirl(this.name, this.age, this.ethnic, this.children, this.description);
       }
       this.$router.push({ path: "/all" });
     },
@@ -84,9 +81,9 @@ export default {
       this.$router.push({ path: "/all" });
     }
   },
-  created() {
+  mounted() { 
     if (this.girlId) {
-      const girl = store.getGirlById(this.girlId);
+      const girl = this.findGirlById(this.girlId);
       this.name = girl.name;
       this.age = girl.age;
       this.ethnic = girl.ethnic;
@@ -94,6 +91,16 @@ export default {
       this.description = girl.description;
     }
   }
+  // created() { //переробити на mounted
+  //   if (this.girlId) {
+  //     const girl = store.getGirlById(this.girlId);
+  //     this.name = girl.name;
+  //     this.age = girl.age;
+  //     this.ethnic = girl.ethnic;
+  //     this.children = girl.children;
+  //     this.description = girl.description;
+  //   }
+  // }
 };
 </script>
 
