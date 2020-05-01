@@ -13,7 +13,7 @@
         <template slot="start">
           <b-navbar-item tag="router-link" :to="{ path: '/' }">Home page</b-navbar-item>
           <b-navbar-item tag="router-link" :to="{ path: '/all' }">All proposals</b-navbar-item>
-          <b-navbar-item tag="router-link" :to="{ path: '/create' }">Add person</b-navbar-item>
+          <b-navbar-item tag="router-link" :to="{ path: '/add' }">Add person</b-navbar-item>
           <b-navbar-dropdown label="Info">
             <b-navbar-item tag="router-link" :to="{ path: '/about' }">About</b-navbar-item>
             <b-navbar-item tag="router-link" :to="{ path: '/contact' }">Contact</b-navbar-item>
