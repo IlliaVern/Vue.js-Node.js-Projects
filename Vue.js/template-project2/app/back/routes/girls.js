@@ -60,8 +60,8 @@ router.post("/add",
             max: 130
         }).withMessage("Age must be min 18 and max 130 years old"),
         check("description").isLength({
-            min: 10,
-            max: 180
+            minlength: 10,
+            maxlength: 180
         }).withMessage("Description must be from 10 up to 180 symbols")
     ],
     function (req, res, next) {
@@ -108,6 +108,17 @@ router.delete("/", function(req, res, next){
 })
 
 //Updating the girl
-router.put("/")
+router.put("/update", function(req,res,next){
+    Girl.findByIdAndUpdate({_id:req.body.id}, {
+        name: req.body.name,
+        age: req.body.age,
+        ethnic: req.body.ethnic,
+        children: req.body.children,
+        description: req.body.description
+    }, {new:true}, function(err,doc){
+        if (err) return res.status(500).json({success:false, err:{msg:"Updating failed"}})
+        else res.status(201).json({success:true, data:girl})
+    })
+})
 
 module.exports = router
