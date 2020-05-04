@@ -81,7 +81,7 @@ export default {
       this.$router.push({ path: "/all" });
     }
   },
-  mounted() { 
+  created() { 
     if (this.girlId) {
       const girl = this.findGirlById(this.girlId);
       this.name = girl.name;

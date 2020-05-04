@@ -20,7 +20,7 @@ export default {
   },
   watch: {
     isError(newVal){
-      if(newVal) this.danger()
+      if(newVal) {this.danger()}
     }
   },
   methods: {
@@ -32,7 +32,7 @@ export default {
         message: 'Error',
         position: 'is-top-right',
         type: 'is-danger',
-        hasIcon: 'true'
+        hasIcon: true
       })
       notif.$on("close", ()=>{
         this.$buefy.notification.open("Custom specification closed")

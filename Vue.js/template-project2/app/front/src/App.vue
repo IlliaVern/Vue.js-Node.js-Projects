@@ -14,22 +14,18 @@
           <b-navbar-item tag="router-link" :to="{ path: '/' }">Home page</b-navbar-item>
           <b-navbar-item tag="router-link" :to="{ path: '/all' }">All proposals</b-navbar-item>
           <b-navbar-item tag="router-link" :to="{ path: '/add' }">Add person</b-navbar-item>
-          <b-navbar-dropdown label="Info">
-            <b-navbar-item tag="router-link" :to="{ path: '/about' }">About</b-navbar-item>
-            <b-navbar-item tag="router-link" :to="{ path: '/contact' }">Contact</b-navbar-item>
-          </b-navbar-dropdown>
         </template>
 
-        <!-- <template slot="end"> -->
-          <!-- <b-navbar-item tag="div"> -->
-            <!-- <div class="buttons"> -->
-              <!-- <a class="button is-primary"> -->
-                <!-- <strong>Sign up</strong> -->
-              <!-- </a> -->
-              <!-- <a class="button is-light">Log in</a> -->
-            <!-- </div> -->
-          <!-- </b-navbar-item> -->
-        <!-- </template> -->
+        <template slot="end">
+          <b-navbar-item tag="div"> 
+            <div class="buttons"> 
+              <a class="button is-primary"> 
+                <strong>Sign up</strong> 
+              </a> 
+              <a class="button is-light">Log in</a> 
+            </div> 
+          </b-navbar-item> 
+        </template> 
       </b-navbar>
     </template>
     <!-- отображаем тут компонент, для которого совпадает маршрут -->

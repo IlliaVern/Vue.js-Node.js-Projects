@@ -1,17 +1,14 @@
 var express = require("express")
 var router = express.Router()
-const {
-    check,
-    validationResult
-} = require("express-validator")
+const { check, validationResult } = require("express-validator")
 
 //1. Imported module
 const mongoose = require("mongoose")
 
 //2. Setup connection
 mongoose.connect('mongodb+srv://IlliaVern:Ae4474ex@cluster0-rnu3z.mongodb.net/girls?retryWrites=true&w=majority', {
-    useUnifiedTopology: true,
     useNewUrlParser: true,
+    useUnifiedTopology: true,
 })
 
 //3. Creating Schema
@@ -23,7 +20,7 @@ const girlSchema = new Schema({
     name: String,
     age: Number,
     ethnic: String,
-    children: Boolean,
+    children: String,
     description: String
 })
 
@@ -60,8 +57,8 @@ router.post("/add",
             max: 130
         }).withMessage("Age must be min 18 and max 130 years old"),
         check("description").isLength({
-            minlength: 10,
-            maxlength: 180
+            min: 10,
+            max: 180
         }).withMessage("Description must be from 10 up to 180 symbols")
     ],
     function (req, res, next) {
@@ -108,7 +105,7 @@ router.delete("/", function(req, res, next){
 })
 
 //Updating the girl
-router.put("/update", function(req,res,next){
+router.put("/edit", function(req,res,next){
     Girl.findByIdAndUpdate({_id:req.body.id}, {
         name: req.body.name,
         age: req.body.age,

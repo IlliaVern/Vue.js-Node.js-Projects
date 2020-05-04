@@ -8,22 +8,23 @@
 
 <script>
 import GirlCard from "./c/GirlCard";
-import { mapActions, mapGetters } from "vuex";
-// import store from "@/store";                        // було
+import { mapGetters } from "vuex";
 export default {
   name: "GirlsCards",
   components: {
     GirlCard
   },
-  
+  data() {
+    return {
+      girls: this.getGirlsList
+    }
+  },
   computed: {
     ...mapGetters("girls", ["getGirlsList"]),
-    girls() {
-      return this.getGirlsList();
-    },
-    // girls() {                                         // було
-    //   return store.loadGirlsList();
+    // girls() {
+    //   return this.getGirlsList();
     // },
+    
   },
 };
 </script>

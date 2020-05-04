@@ -1,8 +1,8 @@
 import axios from "axios"
 import apiEndpoints from "@/constants/apiEndpoints";
-import localData from '../helpers/localData'
 
 export default {
+    namespaced: true,
     state: {
         girlsList: [],
         loading: false,
@@ -35,12 +35,12 @@ export default {
 
             axios 
                 .get(apiEndpoints.girls.read)
-                .then(res=>res.data)
-                .then(resData=>{
+                .then((res)=>res.data)
+                .then((resData)=>{
                     if (resData.success) commit("setGirlsList", resData.data)
                     else throw new Error("Fetch failed :(")
                 })
-                .catch(err=>commit("setError", err))
+                .catch((err)=>commit("setError", err))
                 .finally(()=>commit("setLoading", false))
         },
 
@@ -50,12 +50,12 @@ export default {
 
             axios
                 .post(apiEndpoints.girls.add, girl)
-                .then(res=>res.data)
-                .then(resData=>{
+                .then((res)=>res.data)
+                .then((resData)=>{
                     if(resData.success) commit("addGirlToList", resData.data)
                     else throw new Error("Fetch failed :(")
                 })
-                .catch(err=>commit("setError", err))
+                .catch((err)=>commit("setError", err))
                 .finally(()=>commit("setLoading", false))
         },
 
@@ -65,12 +65,12 @@ export default {
 
             axios
                 .delete(apiEndpoints.girls.delete, {data:{id}})
-                .then(res=>res.data)
-                .then(resData=>{
+                .then((res)=>res.data)
+                .then((resData)=>{
                     if(resData.success) dispatch("loadGirlsList")
                     else throw new Error("Fetch failed :(")
                 })
-                .catch(err=>commit("setError", err))
+                .catch((err)=>commit("setError", err))
                 .finally(()=>commit("setLoading", false))
         },
 
@@ -90,8 +90,8 @@ export default {
         },
 
         findGirlById({dispatch}, girlId){
-            localData.getGirlById(girlId)
-            dispatch("updateGirl")
+            let girl = dispatch("loadGirlsList").find(girl => girl.id === girlId)
+            dispatch("updateGirl", girl)
         }
 
     }
