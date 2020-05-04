@@ -73,7 +73,7 @@ export default {
           description: this.description
         });
       } else {
-        this.addGirl(this.name, this.age, this.ethnic, this.children, this.description);
+        this.addGirl({name:this.name, age:this.age, ethnic:this.ethnic, children:this.children, description:this.description});
       }
       this.$router.push({ path: "/all" });
     },
