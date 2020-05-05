@@ -42,6 +42,6 @@
   ],
   "description": "```\r npm install\r ```",
   "main": "babel.config.js",
-  "author": "Andrii Bryla",
+  "author": "Illia Vernygora",
   "license": "ISC"
 }
