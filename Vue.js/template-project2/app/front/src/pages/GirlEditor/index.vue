@@ -1,5 +1,6 @@
 <template>
   <section>
+    {{girlId}}
     <b-field horizontal label="Name">
       <b-input type="text" placeholder="Please enter a name" v-model="name" required expanded></b-input>
     </b-field>
@@ -65,7 +66,7 @@ export default {
     saveGirl() {
       if (this.girlId) {
         this.updateGirl({
-          id: this.girlId,
+          _id: this.girlId,
           name: this.name,
           age: this.age,
           ethnic: this.ethnic,
@@ -75,32 +76,23 @@ export default {
       } else {
         this.addGirl({name:this.name, age:this.age, ethnic:this.ethnic, children:this.children, description:this.description});
       }
-      this.$router.push({ path: "/all" });
+      this.$router.push({ path: "/girls" });
     },
     onCancel() {
-      this.$router.push({ path: "/all" });
+      this.$router.push({ path: "/girls" });
     }
   },
-  created() { 
+  mounted() { 
     if (this.girlId) {
-      const girl = this.findGirlById(this.girlId);
-      this.name = girl.name;
-      this.age = girl.age;
-      this.ethnic = girl.ethnic;
-      this.children = girl.children;
-      this.description = girl.description;
+      const updatedGirl = this.findGirlById(this.girlId);
+      this.name = updatedGirl.name;
+      this.age = updatedGirl.age;
+      this.ethnic = updatedGirl.ethnic;
+      this.children = updatedGirl.children;
+      this.description = updatedGirl.description;
     }
   }
-  // created() { //переробити на mounted
-  //   if (this.girlId) {
-  //     const girl = store.getGirlById(this.girlId);
-  //     this.name = girl.name;
-  //     this.age = girl.age;
-  //     this.ethnic = girl.ethnic;
-  //     this.children = girl.children;
-  //     this.description = girl.description;
-  //   }
-  // }
+  
 };
 </script>
 

@@ -2,7 +2,7 @@
   <div class="card has-max-width-400">
     <div class="card-image">
       <figure class="image is-1by">
-        <img src="https://bulma.io/images/placeholders/256x256.png" alt="Card image">
+        <img src="https://bulma.io/images/placeholders/128x128.png" alt="Card image">
       </figure>
     </div>
     <div class="card-content">
@@ -24,8 +24,8 @@
     </div>
     <footer class="card-footer">
       <div class="buttons level">
-          <b-button tag="router-link" :to="`/edit/${girl.id}`" type="is-link">Edit</b-button>
-          <b-button type="is-danger" icon-left="delete" @click="deleteGirl(girl.id)">Delete</b-button>
+          <b-button tag="router-link" :to="`/edit/${girl._id}`" type="is-link">Edit</b-button>
+          <b-button type="is-danger" icon-left="delete" @click="deleteGirl(girl._id)">Delete</b-button>
       </div>
     </footer>
   </div>
@@ -46,13 +46,10 @@ export default {
   
   methods: {
     ...mapActions("girls", ["deleteGirl"]),
-
-    deleteGirl(girlId) {
-      this.girls = this.deleteGirl(girlId);
-    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+
 </style>

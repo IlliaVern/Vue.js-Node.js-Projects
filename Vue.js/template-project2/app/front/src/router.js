@@ -9,8 +9,8 @@ Vue.use(VueRouter)
 
 const routes = [
     { path: '/', component: Home },
-    { path: '/all', component: GirlsViewer },
-    { path: '/add', component: GirlEditor },
+    { path: '/girls', component: GirlsViewer },
+    { path: '/girls/add', component: GirlEditor },
     { path: '/edit/:girlId', component: GirlEditor },
 
   ]

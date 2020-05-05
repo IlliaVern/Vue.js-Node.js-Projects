@@ -12,8 +12,8 @@
         </template>
         <template slot="start">
           <b-navbar-item tag="router-link" :to="{ path: '/' }">Home page</b-navbar-item>
-          <b-navbar-item tag="router-link" :to="{ path: '/all' }">All proposals</b-navbar-item>
-          <b-navbar-item tag="router-link" :to="{ path: '/add' }">Add person</b-navbar-item>
+          <b-navbar-item tag="router-link" :to="{ path: '/girls' }">All girls</b-navbar-item>
+          <b-navbar-item tag="router-link" :to="{ path: '/girls/add' }">Add girl</b-navbar-item>
         </template>
 
         <template slot="end">
@@ -50,6 +50,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color: #FFB6C1;
   margin-top: 60px;
 }
 </style>

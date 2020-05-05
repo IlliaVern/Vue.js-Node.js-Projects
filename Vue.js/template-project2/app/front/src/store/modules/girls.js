@@ -90,10 +90,9 @@ export default {
         },
 
         findGirlById({dispatch}, girlId){
-            let girl = dispatch("loadGirlsList").find(girl => girl.id === girlId)
-            dispatch("updateGirl", girl)
+            let girlsList = dispatch("loadGirlsList")
+            return girlsList[girlId]
         }
-
     }
 
 };
