@@ -1,6 +1,5 @@
 <template>
   <section>
-    {{girlId}}
     <b-field horizontal label="Name">
       <b-input type="text" placeholder="Please enter a name" v-model="name" required expanded></b-input>
     </b-field>
@@ -51,11 +50,12 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("girls", ["getGirlsList"]),
+    ...mapGetters("girls", ["getGirlToUpdate"]),
 
     girlId() {
       return this.$route.params.girlId;
     },
+    
     isDataValid() {
       return (this.name && this.age && this.ethnic && this.children && this.description);
     },
@@ -67,8 +67,6 @@ export default {
     ...mapActions("girls", ["addGirl", "updateGirl", "findGirlById"]),
     saveGirl() {
       if (this.girlId) {
-      console.log(this.girlId);
-
         this.updateGirl({
           _id: this.girlId,
           name: this.name,
@@ -87,14 +85,15 @@ export default {
     }
   },
   created() { 
+    
     if (this.girlId) {
-      
-      const updatedGirl=this.findGirlById(this.girlId)
-      this.name = updatedGirl.name;
-      this.age = updatedGirl.age;
-      this.ethnic = updatedGirl.ethnic;
-      this.children = updatedGirl.children;
-      this.description = updatedGirl.description;
+      this.findGirlById(this.girlId)
+      const girlToUpdate = this.getGirlToUpdate
+      this.name = girlToUpdate.name;
+      this.age = girlToUpdate.age;
+      this.ethnic = girlToUpdate.ethnic;
+      this.children = girlToUpdate.children;
+      this.description = girlToUpdate.description;
     }
   }
   

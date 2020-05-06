@@ -5,12 +5,13 @@ export default {
     namespaced: true,
     state: {
         girlsList: [],
+        girlToUpdate: {},
         loading: false,
         error: false
     },
     getters: {
         getGirlsList: (state) => state.girlsList,
-
+        getGirlToUpdate: (state) => state.girlToUpdate,
         isLoading: (state) => state.loading,
         isError: (state) => state.error
     },
@@ -20,6 +21,9 @@ export default {
         },
         addGirlToList(state, girl) {
             state.girlsList.push(girl)
+        },
+        setGirlToUpdate(state, data) {
+            state.girlToUpdate = {...data}
         },
         setLoading(state, data) {
             state.loading = data
@@ -89,10 +93,20 @@ export default {
                 .finally(()=>commit("setLoading", false))
         },
 
-        findGirlById({getters}, girlId){
-            let girlsList = getters("getGirlsList")
-            return girlsList[girlId]
-        }
+        findGirlById({commit}, girlId){
+            commit("setLoading", true)
+            commit("setError", null)
+
+             axios
+                .get(apiEndpoints.girls.findById(girlId))
+                .then(res=>res.data)
+                .then (resData=>{
+                    if(resData.success) commit("setGirlToUpdate", resData.data)
+                    else throw new Error("Fetch failed :(")
+                })
+                .catch(err=>commit("setError", err))
+                .finally(()=>commit("setLoading", false))
+        },
     }
 
 };

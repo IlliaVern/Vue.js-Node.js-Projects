@@ -4,7 +4,6 @@ export default {
         add:`${process.env.VUE_APP_API_URL}/girls/add`,
         delete:`${process.env.VUE_APP_API_URL}/girls`,
         update:`${process.env.VUE_APP_API_URL}/girls/edit`,
-
+        findById:(id)=>`${process.env.VUE_APP_API_URL}/girls/edit/${id}`,
     }
-    
 };

@@ -29,22 +29,7 @@ const girlSchema = new Schema({
 const Girl = mongoose.model("Girl", girlSchema)
 //=============================================
 
-//Get girls list
-router.get("/", function (req, res, next) {
-    //selection all documents from the base
-    Girl.find({}, function (err, allGirls) {
-        if (err) return res.status(500).json({
-            success: false,
-            err: {
-                msg: "Fetch failed"
-            }
-        })
-        res.status(200).json({
-            success: true,
-            data: allGirls
-        })
-    })
-})
+
 
 //Adding new girl to the base
 router.post("/add",
@@ -81,16 +66,8 @@ router.post("/add",
             })
             //6.Saving the document
             girl.save(function (err, girl) {
-                if (err) return res.status(500).json({
-                    success: false,
-                    err: {
-                        msg: "Saving failed"
-                    }
-                })
-                else res.status(201).json({
-                    success: true,
-                    data: girl
-                })
+                if (err) return res.status(500).json({success: false, err: {msg: "Saving failed"}})
+                else res.status(201).json({success: true, data: girl})
             })
         }
     }
@@ -104,19 +81,32 @@ router.delete("/", function(req, res, next){
     })
 })
 
+router.get("/edit/:id", function (req, res, next) {
+    Girl.findById({_id:req.params.id}, function (err, girlToUpdate) {
+        if (err) return res.status(500).json({success: false, err: {msg: "Fetch failed"}})
+        res.status(200).json({success: true, data: girlToUpdate})
+    })
+})
 //Updating the girl
-router.put("/edit/", function(req,res,next){
-    Girl.findByIdAndUpdate({_id:req.body.id}, {
+router.put("/edit/:id", function(req,res,next){
+    Girl.findByIdAndUpdate({_id:req.params.id}, {
         name: req.body.name,
         age: req.body.age,
         ethnic: req.body.ethnic,
         children: req.body.children,
         description: req.body.description
-    }, {new:true}, function(err,doc){
-        console.log(_id);
-        
+    }, {new:true}, function(err,girl){
         if (err) return res.status(500).json({success:false, err:{msg:"Updating failed"}})
         else res.status(201).json({success:true, data:girl})
+    })
+})
+
+//Get girls list
+router.get("/", function (req, res, next) {
+    //selection all documents from the base
+    Girl.find({}, function (err, allGirls) {
+        if (err) return res.status(500).json({success: false, err: {msg: "Fetch failed"}})
+        res.status(200).json({success: true, data: allGirls})
     })
 })
 

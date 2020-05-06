@@ -33,7 +33,6 @@
 </template>
 
 <script>
-// import store from "@/store";
 import {mapActions} from "vuex"
 
 export default {
