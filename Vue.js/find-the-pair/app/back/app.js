@@ -26,11 +26,35 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(urlencodedParser)
 
-//Додали до об"єкта запиту ще одну властивысть - корінь проєкта
-app.use((req,res,next)=>{
-  req.dataDir=__dirname
-  next()
-})
+// //Додали до об"єкта запиту ще одну властивысть - корінь проєкта
+// app.use((req,res,next)=>{
+//   req.dataDir=__dirname
+//   next()
+// })
+
+const {parseBearer} =require('./utils/token')
+
+
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  next();
+});
+
+app.use((req, res, next) => {
+  const openPaths = [ '/users/login', '/users/signup' ];
+  if (!openPaths.includes(req.path)) {
+      try {        
+          req.user = parseBearer(req.headers.authorization, req.headers);
+      } 
+      catch (err) {
+          return res.status(401).json({ result: 'Access Denied' });
+      }
+  }
+  next();
+});
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
