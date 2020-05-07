@@ -24,7 +24,6 @@
     </div>
     <footer class="card-footer">
       <div class="buttons level">
-          <!-- <b-button type="is-link" @click="findGirlById(girl._id)" tag="router-link" :to="`/edit/${girl._id}`">Edit</b-button> -->
           <b-button type="is-link" tag="router-link" :to="`girls/edit/${girl._id}`">Edit</b-button>
           <b-button type="is-danger" @click="deleteGirl(girl._id)">Delete</b-button>
       </div>

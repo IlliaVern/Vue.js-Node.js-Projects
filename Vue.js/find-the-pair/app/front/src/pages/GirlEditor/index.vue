@@ -1,7 +1,7 @@
 <template>
   <section>
 <b-loading :is-full-page="true" :active.sync="isLoading"></b-loading>
-
+    {{pageHeader}} girl
     <b-field horizontal label="Name">
       <b-input type="text" placeholder="Please enter a name" v-model="name" required expanded></b-input>
     </b-field>
@@ -63,6 +63,9 @@ export default {
     },
     saveButtonTitle() {
       return this.girlId ? "Save" : "Add";
+    },
+    pageHeader(){
+      return this.girlId ? "Update" : "Add"
     }
   },
   watch: {
