@@ -1,5 +1,7 @@
 <template>
   <section>
+<b-loading :is-full-page="true" :active.sync="isLoading"></b-loading>
+
     <b-field horizontal label="Name">
       <b-input type="text" placeholder="Please enter a name" v-model="name" required expanded></b-input>
     </b-field>
@@ -50,7 +52,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("girls", ["getGirlToUpdate"]),
+    ...mapGetters("girls", ["getGirlToUpdate", "isLoading"]),
 
     girlId() {
       return this.$route.params.girlId;
@@ -61,6 +63,18 @@ export default {
     },
     saveButtonTitle() {
       return this.girlId ? "Save" : "Add";
+    }
+  },
+  watch: {
+    isLoading(newValue) {
+      if(!newValue) {
+      const girlToUpdate = this.getGirlToUpdate
+      this.name = girlToUpdate.name;
+      this.age = girlToUpdate.age;
+      this.ethnic = girlToUpdate.ethnic;
+      this.children = girlToUpdate.children;
+      this.description = girlToUpdate.description;
+      }
     }
   },
   methods: {
@@ -88,15 +102,8 @@ export default {
     
     if (this.girlId) {
       this.findGirlById(this.girlId)
-      const girlToUpdate = this.getGirlToUpdate
-      this.name = girlToUpdate.name;
-      this.age = girlToUpdate.age;
-      this.ethnic = girlToUpdate.ethnic;
-      this.children = girlToUpdate.children;
-      this.description = girlToUpdate.description;
     }
   }
-  
 };
 </script>
 

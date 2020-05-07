@@ -83,7 +83,7 @@ export default {
             commit("setError", null)
 
             axios
-                .put(apiEndpoints.girls.update, girl)
+                .put(apiEndpoints.girls.update(girl._id), girl)
                 .then(res=>res.data)
                 .then(resData=>{
                     if(resData.success) dispatch("loadGirlsList")

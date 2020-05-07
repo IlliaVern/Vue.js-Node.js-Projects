@@ -3,7 +3,7 @@ export default {
         read:`${process.env.VUE_APP_API_URL}/girls`,
         add:`${process.env.VUE_APP_API_URL}/girls/add`,
         delete:`${process.env.VUE_APP_API_URL}/girls`,
-        update:`${process.env.VUE_APP_API_URL}/girls/edit`,
+        update:(id)=>`${process.env.VUE_APP_API_URL}/girls/edit/${id}`,
         findById:(id)=>`${process.env.VUE_APP_API_URL}/girls/edit/${id}`,
     }
 };

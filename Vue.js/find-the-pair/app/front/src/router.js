@@ -11,7 +11,7 @@ const routes = [
     { path: '/', component: Home },
     { path: '/girls', component: GirlsViewer },
     { path: '/girls/add', component: GirlEditor },
-    { path: '/edit/:girlId', component: GirlEditor },
+    { path: '/girls/edit/:girlId', component: GirlEditor },
 
   ]
 
