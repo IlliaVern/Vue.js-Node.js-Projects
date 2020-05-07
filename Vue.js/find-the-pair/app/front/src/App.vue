@@ -19,10 +19,11 @@
         <template slot="end">
           <b-navbar-item tag="div"> 
             <div class="buttons"> 
-              <a class="button is-primary"> 
+              <a v-if="!isAuthenticated()" class="button is-primary" href="/signup"> 
                 <strong>Sign up</strong> 
               </a> 
-              <a class="button is-light">Log in</a> 
+              <a v-if="!isAuthenticated()" class="button is-light" href="/login">Log in</a>
+              <a v-if="isAuthenticated()" class="button is-primary" @click="onLogout">Log out</a> 
             </div> 
           </b-navbar-item> 
         </template> 
@@ -34,11 +35,19 @@
 </template>
 
 <script>
+import { mapGetters, mapActions} from "vuex"
 export default {
   name: "App",
-  components: {},
-  data() {
-    return {};
+  computed: {
+    ...mapGetters("authorization", ["isAuthenticated"])
+  },
+  methods: {
+    ...mapActions("authorization", ["logout"]),
+
+    onLogout(){
+      this.logout()
+      this.$router.push({path:"/login"})
+    }
   }
 };
 </script>

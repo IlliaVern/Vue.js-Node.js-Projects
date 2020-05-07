@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import girls from './modules/girls'
+import authorization from './modules/authorization'
+
 
 Vue.use(Vuex)
 
@@ -10,7 +12,8 @@ const store = new Vuex.Store({
     mutations: {},
     actions: {},
     modules: {
-        girls
+        girls,
+        authorization
     }
 })
 

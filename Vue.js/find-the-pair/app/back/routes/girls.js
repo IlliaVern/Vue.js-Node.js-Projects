@@ -29,7 +29,14 @@ const girlSchema = new Schema({
 const Girl = mongoose.model("Girl", girlSchema)
 //=============================================
 
-
+//Get girls list
+router.get("/", function (req, res, next) {
+    //selection all documents from the base
+    Girl.find({}, function (err, allGirls) {
+        if (err) return res.status(500).json({success: false, err: {msg: "Fetch failed"}})
+        res.status(200).json({success: true, data: allGirls})
+    })
+})
 
 //Adding new girl to the base
 router.post("/add",
@@ -49,12 +56,7 @@ router.post("/add",
     function (req, res, next) {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
-            return res.json({
-                success: false,
-                err: {
-                    msg: errors.array().map((e) => e.msg).join(", ")
-                }
-            })
+            return res.json({ success: false, err: {msg: errors.array().map((e) => e.msg).join(", ")} })
         } else {
             //5.Creating document
             const girl = new Girl({
@@ -101,13 +103,5 @@ router.put("/edit/:id", function(req,res,next){
     })
 })
 
-//Get girls list
-router.get("/", function (req, res, next) {
-    //selection all documents from the base
-    Girl.find({}, function (err, allGirls) {
-        if (err) return res.status(500).json({success: false, err: {msg: "Fetch failed"}})
-        res.status(200).json({success: true, data: allGirls})
-    })
-})
 
 module.exports = router
