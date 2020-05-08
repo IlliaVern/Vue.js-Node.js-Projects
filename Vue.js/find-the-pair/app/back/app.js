@@ -26,11 +26,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(urlencodedParser)
 
-// //Додали до об"єкта запиту ще одну властивысть - корінь проєкта
-// app.use((req,res,next)=>{
-//   req.dataDir=__dirname
-//   next()
-// })
+//Додали до об"єкта запиту ще одну властивысть - корінь проєкта
+app.use((req,res,next)=>{
+  req.dataDir=__dirname
+  next()
+})
 
 const {parseBearer} =require('./utils/token')
 

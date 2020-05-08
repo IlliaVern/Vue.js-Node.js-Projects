@@ -34,7 +34,7 @@ router.post('/login', function(req, res){
         return res.status(401).json({error:'Password incorrect'})
       }
         const token = prepareToken({id: user._id}, req.headers)
-        const expiresAt = new Date().getTime()+36000000
+        const expiresAt = new Date().getTime() +36000000
         res.status(200).json({
           result: 'Authorized',
           user:{

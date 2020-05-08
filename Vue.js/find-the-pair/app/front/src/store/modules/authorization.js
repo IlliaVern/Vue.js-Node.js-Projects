@@ -8,10 +8,10 @@ export default {
         expiresAt: localStorage.getItem('expiresAt') || null
     },
     getters: {
-        isAuthenticated: (state)=>{
+        isAuthenticated: state=>()=>{
             return state.authenticationData && new Date().getTime() < state.expiresAt
         },
-        getAccessToken: (state)=>{
+        getAccessToken: state=>()=>{
             return state.authenticationData && state.authenticationData.access_token
         },
         authorized: state=>state.authenticationData && new Date().getTime() < state.expiresAt
@@ -41,7 +41,7 @@ export default {
                 axios
                 .post(apiEndpoints.user.signup, {email, password})
                 .then(function(){
-                    commit('setUpAuthenticationData', { authenticationData: user.data })
+                    // commit('setUpAuthenticationData', { authenticationData: user.data })
                     resolve(true) })
                 .catch(err=>{
                     commit('clearAuthenticationData')

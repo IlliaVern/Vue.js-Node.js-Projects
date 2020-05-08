@@ -1,22 +1,15 @@
 <template>
   <section>
     <h2>Signup</h2>
-    <form @submit.prevent="submit">
-      <b-field label="Email" type="is-danger" message="This email is invalid">
-        <b-input type="email" value="john@" maxlength="40" v-model="email"></b-input>
+      <b-field label="Email">
+        <b-input type="email" value="john@" maxlength="40" name="email" v-model="email"></b-input>
       </b-field>
 
-      <b-field
-        label="Password"
-        type="is-warning"
-        :message="['Password is too short', 'Password must have at least 8 characters']"
-      >
-        <b-input value="123" type="password" maxlength="30" v-model="password"></b-input>
+      <b-field label="Password">
+        <b-input value="123" type="password" maxlength="30" name="password" v-model="password"></b-input>
       </b-field>
       <div v-if="message">{{message}}</div>
-      <div><b-button type="submit" @click="submit">Signup</b-button></div>
-      <!-- <div><b-button @click="submit">Signup</b-button></div> -->
-    </form>
+      <div><b-button @click="submit">Signup</b-button></div>
   </section>
 </template>
 
