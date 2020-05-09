@@ -22,6 +22,6 @@
     "parse-bearer-token": "^1.0.1"
   },
   "engines": {
-    "node": "10.x"
+    "node": "12.16.x"
   }
 }
