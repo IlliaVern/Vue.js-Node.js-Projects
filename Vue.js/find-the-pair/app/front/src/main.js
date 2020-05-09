@@ -30,9 +30,6 @@ axios.interceptors.response.use(
   function (response) {
     return response;
   },
-  // error => (error.response.status === 401) ? router.push({
-  //   path: "/login"
-  // }) : Promise.reject(error)
   function(error) {
     if (error.response.status === 401) {      // Якщо сервер відповів «401»
       router.push({ path: "/login" });
