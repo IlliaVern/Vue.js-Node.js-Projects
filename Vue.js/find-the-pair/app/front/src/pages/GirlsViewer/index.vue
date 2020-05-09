@@ -1,8 +1,12 @@
 <template>
   <div>
-    All proposals
     <b-loading :is-full-page="true" :active.sync="isLoading"></b-loading>
-    <girls-cards />
+    <div>
+      All proposals <br/>
+    </div>
+    <div>
+      <girls-cards />
+    </div>
   </div>
 </template>
 

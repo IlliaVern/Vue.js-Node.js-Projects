@@ -1,8 +1,6 @@
 <template>
   <div class="columns">
-    <div v-for="(girl, girlId) in getGirlsList" :key="girlId" class="column">
-      <girl-card :girl="girl" />
-    </div>
+      <girl-card v-for="(girl, girlId) in getGirlsList" :key="girlId" :girl="girl" class="card column"/>
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="card has-max-width-400">
+  <div class="card column">
     <div class="card-image">
       <figure class="image is-1by">
         <img :src="girl.imgFile" alt="Girl image" class="girlImg">
@@ -53,6 +53,5 @@ export default {
   .girlImg {
   width: 150px;
   height: 150px;
-  margin: 15px 15px 15px 0px;
 }
 </style>
