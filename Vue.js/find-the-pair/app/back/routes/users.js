@@ -10,10 +10,10 @@ router.post('/signup', function(req, res){
   user.save()
       .then((user)=>{
         const token = prepareToken({id: user._id}, req.headers)
-        return res.status(201).json({result:'Signuped successfully', token})
+        return res.status(201).json({result:'Signup successfully', token})
       })
       .catch((err)=>{
-        return res.status(500).json({error:'Sugnup error'})
+        return res.status(500).json({error:'Signup error'})
       })
 })
 

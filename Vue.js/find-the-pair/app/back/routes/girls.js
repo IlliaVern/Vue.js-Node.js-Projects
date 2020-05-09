@@ -40,6 +40,7 @@ router.post("/add",
                 age: req.body.age,
                 ethnic: req.body.ethnic,
                 children: req.body.children,
+                imgFile: req.body.imgFile,
                 description: req.body.description
             })
             //6.Saving the document
@@ -72,12 +73,12 @@ router.put("/edit/:id", function(req,res,next){
         age: req.body.age,
         ethnic: req.body.ethnic,
         children: req.body.children,
+        imgFile: req.body.imgFile,
         description: req.body.description
     }, {new:true}, function(err,girl){
         if (err) return res.status(500).json({success:false, err:{msg:"Updating failed"}})
         else res.status(201).json({success:true, data:girl})
     })
 })
-
 
 module.exports = router

@@ -22,6 +22,12 @@
         <b-switch v-model="children" true-value="Yes" false-value="No">{{ children }}</b-switch>
       </div>
     </b-field>
+    <b-field horizontal label="Image" class="file">
+        <b-upload v-model="imgFile">
+            <a class="button is-primary"><b-icon icon="upload"></b-icon><span>Click to upload</span></a>
+        </b-upload>
+        <span class="file-name" v-if="imgFile">{{ imgFile.name }}</span>
+    </b-field>
 
     <b-field horizontal label="Description">
       <b-input type="textarea" maxlength="128" placeholder="Enter description"
@@ -46,9 +52,10 @@ export default {
       name: null,
       age: null,
       ethnic: null,
-      description: null,
       isSwitched: false,
-      children: "No"
+      children: "No",
+      imgFile: null,
+      description: null
     };
   },
   computed: {
@@ -59,7 +66,7 @@ export default {
     },
     
     isDataValid() {
-      return (this.name && this.age && this.ethnic && this.children && this.description);
+      return (this.name && this.age && this.ethnic && this.children && this.imgFile && this.description);
     },
     saveButtonTitle() {
       return this.girlId ? "Save" : "Add";
@@ -76,6 +83,7 @@ export default {
       this.age = girlToUpdate.age;
       this.ethnic = girlToUpdate.ethnic;
       this.children = girlToUpdate.children;
+      this.imgFile = girlToUpdate.imgFile;
       this.description = girlToUpdate.description;
       }
     }
@@ -90,10 +98,11 @@ export default {
           age: this.age,
           ethnic: this.ethnic,
           children: this.children,
+          imgFile: this.imgFile,
           description: this.description
         });
       } else {
-        this.addGirl({name:this.name, age:this.age, ethnic:this.ethnic, children:this.children, description:this.description});
+        this.addGirl({name:this.name, age:this.age, ethnic:this.ethnic, children:this.children, imgFile: this.imgFile, description:this.description});
       }
       this.$router.push({ path: "/girls" });
     },

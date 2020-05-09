@@ -88,8 +88,6 @@ export default {
     },
 
     onSelect(e) {
-      console.log(e);
-
       const reader = new FileReader();
       const self = this;
       reader.onloadend = function(e) {

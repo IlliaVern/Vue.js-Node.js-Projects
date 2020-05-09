@@ -2,16 +2,17 @@
   <div class="card has-max-width-400">
     <div class="card-image">
       <figure class="image is-1by">
-        <img src="https://bulma.io/images/placeholders/128x128.png" alt="Card image">
+        <!-- <img src="https://bulma.io/images/placeholders/128x128.png" alt="Girl image"> -->
+        <img :src="girl.imgFile" alt="Girl image" class="girlImg">
       </figure>
     </div>
     <div class="card-content">
       <div class="media">
-        <div class="media-left">
+        <!-- <div class="media-left">
           <figure class="image is-64x64">
             <img src="https://bulma.io/images/placeholders/64x64.png" alt="Citelogo image">
           </figure>
-        </div>
+        </div> -->
         <div class="media-content">
           <p class="title is-4">{{girl.name}}</p>
           <p class="subtitle is-6">Age: {{girl.age}}</p>
@@ -49,6 +50,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="css" scoped>
+  .girlImg {
+  width: 150px;
+  height: 150px;
+}
 </style>
