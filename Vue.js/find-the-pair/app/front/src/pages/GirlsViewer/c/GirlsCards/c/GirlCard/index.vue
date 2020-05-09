@@ -2,7 +2,6 @@
   <div class="card has-max-width-400">
     <div class="card-image">
       <figure class="image is-1by">
-        <!-- <img src="https://bulma.io/images/placeholders/128x128.png" alt="Girl image"> -->
         <img :src="girl.imgFile" alt="Girl image" class="girlImg">
       </figure>
     </div>
@@ -54,5 +53,6 @@ export default {
   .girlImg {
   width: 150px;
   height: 150px;
+  margin: 15px 15px 15px 0px;
 }
 </style>

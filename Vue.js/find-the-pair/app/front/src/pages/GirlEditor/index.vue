@@ -23,10 +23,9 @@
       </div>
     </b-field>
     <b-field horizontal label="Image" class="file">
-        <b-upload v-model="imgFile">
-            <a class="button is-primary"><b-icon icon="upload"></b-icon><span>Click to upload</span></a>
-        </b-upload>
+        <input type="file" @change="onSelect" />
         <span class="file-name" v-if="imgFile">{{ imgFile.name }}</span>
+        <img v-if="girlId" :src="imgFile" class="img" />
     </b-field>
 
     <b-field horizontal label="Description">
@@ -105,6 +104,14 @@ export default {
         this.addGirl({name:this.name, age:this.age, ethnic:this.ethnic, children:this.children, imgFile: this.imgFile, description:this.description});
       }
       this.$router.push({ path: "/girls" });
+    },
+    onSelect(e) {
+      const reader = new FileReader();
+      const self = this;
+      reader.onloadend = function(e) {
+        self.imgFile = e.target.result;
+      };
+      reader.readAsDataURL(e.target.files[0]);
     },
     onCancel() {
       this.$router.push({ path: "/girls" });
