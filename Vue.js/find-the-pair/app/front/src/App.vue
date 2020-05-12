@@ -19,17 +19,14 @@
         <template slot="end">
           <b-navbar-item tag="div"> 
             <div class="buttons"> 
-              <a v-if="!isAuthenticated()" class="button is-primary" href="/signup"> 
-                <strong>Sign up</strong> 
-              </a> 
-              <a v-if="!isAuthenticated()" class="button is-light" href="/login">Log in</a>
-              <a v-if="isAuthenticated()" class="button is-primary" @click="onLogout">Log out</a> 
+              <a v-if="!isAuthenticated()" class="button is-primary" href="/signup"><strong>Sign up</strong></a> 
+              <a v-if="!isAuthenticated()" class="button is-light" href="/login"><strong>Log in</strong></a>
+              <a v-if="isAuthenticated()" class="button is-primary" @click="onLogout"><strong>Log out</strong></a> 
             </div> 
           </b-navbar-item> 
         </template> 
       </b-navbar>
     </template>
-    <!-- отображаем тут компонент, для которого совпадает маршрут -->
     <router-view></router-view>
   </div>
 </template>

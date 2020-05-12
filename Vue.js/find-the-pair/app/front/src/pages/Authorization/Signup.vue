@@ -6,7 +6,7 @@
       </b-field>
 
       <b-field label="Password">
-        <b-input value="123" type="password" maxlength="30" name="password" v-model="password"></b-input>
+        <b-input value="123" type="password" minlength="6" maxlength="30" name="password" v-model="password"></b-input>
       </b-field>
       <div v-if="message">{{message}}</div>
       <div><b-button @click="submit">Signup</b-button></div>

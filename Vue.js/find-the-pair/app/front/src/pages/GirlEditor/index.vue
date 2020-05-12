@@ -22,21 +22,11 @@
         <b-switch v-model="children" true-value="Yes" false-value="No">{{ children }}</b-switch>
       </div>
     </b-field>
-    <!-- <b-field horizontal label="Image" class="file">
-        <b-upload>
-            <a class="button is-primary" @click="onSelect"><b-icon icon="upload"></b-icon><span>Click to upload</span></a>
-        </b-upload>
-        <span class="file-name" v-if="imgFile">{{ imgFile.name }}</span>
-    </b-field> -->
     <b-field horizontal label="Image" class="file">
         <input type="file" @change="onSelect" />
         <span class="file-name" v-if="imgFile">{{ imgFile.name }}</span>
         <img v-if="girlId" :src="imgFile" class="uploadedImg" />
     </b-field>
-    <!-- <b-field horizontal label="Image" class="file">
-      <label for="fileElem">Click to upload</label>
-      <input type="file" id="fileElem" style="display:none" @change="onSelect"> 
-    </b-field> -->
     <b-field horizontal label="Description">
       <b-input type="textarea" maxlength="128" placeholder="Enter description"
         v-model="description" required expanded></b-input>
@@ -74,7 +64,6 @@ export default {
     },
     
     isDataValid() {
-      // return (this.name && this.age && this.ethnic && this.children && this.imgFile && this.description);
       return (this.name && this.age && this.ethnic && this.children && this.description);
     },
     saveButtonTitle() {

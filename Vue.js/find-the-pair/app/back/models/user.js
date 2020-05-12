@@ -4,7 +4,10 @@ const crypto = require('crypto')
 const {Schema} = mongoose
 
 const UsersSchema = new Schema({
-    email: String,
+    email: {
+        type: String,
+        required: true
+    },
     hash: String, // поле с хэшэм пароля
     salt: String  // поле с ключом
 })
