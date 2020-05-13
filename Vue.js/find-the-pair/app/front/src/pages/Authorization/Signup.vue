@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h2>Signup</h2>
+    <h2>Signup</h2> <hr>
       <b-field label="Email">
         <b-input type="email" value="john@" maxlength="40" name="email" v-model="email"></b-input>
       </b-field>

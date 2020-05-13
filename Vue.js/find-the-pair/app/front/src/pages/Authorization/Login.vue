@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h2>Login</h2>
+    <h2>Login</h2> <hr>
       <div>To enter FindThePair App please log in</div>
 
       <b-field label="Email">

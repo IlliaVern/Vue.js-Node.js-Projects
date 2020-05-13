@@ -6,6 +6,7 @@ const {Schema} = mongoose
 const UsersSchema = new Schema({
     email: {
         type: String,
+        unique: true,
         required: true
     },
     hash: String, // поле с хэшэм пароля

@@ -1,7 +1,7 @@
 <template>
   <section>
 <b-loading :is-full-page="true" :active.sync="isLoading"></b-loading>
-    {{pageHeader}} girl
+    {{pageHeader}} girl <hr>
     <b-field horizontal label="Name">
       <b-input type="text" placeholder="Please enter a name" v-model="name" required expanded></b-input>
     </b-field>
@@ -40,7 +40,6 @@
 </template>
 
 <script>
-// import store from "@/store"; //було
 import {mapGetters, mapActions} from "vuex"
 
 export default {

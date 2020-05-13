@@ -1,7 +1,7 @@
 <template>
   <div class="card column">
     <div class="card-image">
-      <figure class="image is-1by">
+      <figure class="image">
         <img :src="girl.imgFile" alt="Girl image" class="girlImg">
       </figure>
     </div>
@@ -49,4 +49,5 @@ export default {
   width: 150px;
   height: 150px;
 }
+
 </style>

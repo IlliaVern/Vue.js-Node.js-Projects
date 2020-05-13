@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>Hello</h3><br>
+        <h3>Hello</h3> <hr>
         Hello dear Visitor and thank you to visit our FindThePair App
         <div v-if="!isAuthenticated()">
             Please Login or Signup to start using our app and good luck...

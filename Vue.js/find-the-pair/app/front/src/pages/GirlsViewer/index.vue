@@ -2,7 +2,7 @@
   <div>
     <b-loading :is-full-page="true" :active.sync="isLoading"></b-loading>
     <div>
-      All proposals <br/>
+      All proposals <hr>
     </div>
     <div>
       <girls-cards />

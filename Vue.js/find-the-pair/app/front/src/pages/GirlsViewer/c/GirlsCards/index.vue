@@ -1,6 +1,6 @@
 <template>
   <div class="columns">
-      <girl-card v-for="(girl, girlId) in getGirlsList" :key="girlId" :girl="girl" class="card column"/>
+      <girl-card v-for="(girl, girlId) in getGirlsList" :key="girlId" :girl="girl"/>
   </div>
 </template>
 
@@ -26,5 +26,5 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 </style>
