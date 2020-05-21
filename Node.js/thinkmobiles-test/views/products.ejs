@@ -1,0 +1,23 @@
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(product of products) { %>
+        <tr>
+            <td><%= product.title %></td>
+            <td><%= product.price %></td>
+            <td><%= product.description %></td>
+            <td>
+                <a href="/products/edit/<%= product._id %>">Edit</a>
+                <a href="/products/delete/<%= product._id %>">Delete</a>
+                <a href="/products/details/<%= product._id %>">Details</a>
+            </td>
+        </tr>
+        <% } %>
+    </tbody>
+</table>
