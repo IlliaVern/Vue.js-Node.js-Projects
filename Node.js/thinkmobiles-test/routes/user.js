@@ -6,11 +6,6 @@ const jwt = require('jsonwebtoken')
 
 const User = require('../models/User')
 
-// /* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'Home page', shopName: 'ThinkMobiles Test Shop' });
-// });
-
 router.post('/signup', (req, res, next) => {
   User.find({
       email: req.body.email
