@@ -7,7 +7,7 @@ const mongoose = require('mongoose')
 var dotenv = require('dotenv').config({path: './.env'})
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var userRouter = require('./routes/user');
 var productsRouter = require('./routes/products');
 
 var app = express();
@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(urlencodedParser)
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', userRouter);
 app.use('/products', productsRouter);
 
 var url = process.env.MONGODB_URI

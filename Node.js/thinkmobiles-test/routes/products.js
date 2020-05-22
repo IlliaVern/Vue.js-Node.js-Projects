@@ -1,5 +1,5 @@
-var express = require('express')
-var router = express.Router()
+const express = require('express')
+const router = express.Router()
 const mongoose = require('mongoose')
 const { check} = require('express-validator')
 
@@ -100,7 +100,8 @@ router.put('/edit/:productId', [
 })
 
 /* Delete product from DB. */
-router.get('/delete/:productId', (req, res, next) => {
+router.delete('/delete/:productId', (req, res, next) => { // delete http request is better
+// router.get('/delete/:productId', (req, res, next) => {
     Product.remove({_id: req.params.productId})
         .exec()
         .then(res.redirect('/products'))
