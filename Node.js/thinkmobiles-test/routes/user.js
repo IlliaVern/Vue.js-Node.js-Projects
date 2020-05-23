@@ -6,6 +6,13 @@ const jwt = require('jsonwebtoken')
 
 const User = require('../models/User')
 
+/* GET signup page. */
+router.get('/signup', function(req, res, next){
+  res.render('main', { title: 'Signup', shopName: 'ThinkMobiles Test Shop',
+  page: 'signUp' })
+})
+
+/* Registering new user and adding to DB. */
 router.post('/signup', (req, res, next) => {
   User.find({
       email: req.body.email
@@ -13,15 +20,17 @@ router.post('/signup', (req, res, next) => {
     .exec()
     .then(user => {
       if (user.length >= 1) {
-        // if (user !== null) { // попробовать (так понятнее)
+      // if (user !== null) { // попробовать (так понятнее)
         return res.status(409).json({
-          message: 'Email exists'
+          success: false, err: {msg: err}
+          // message: 'Email exists'
         })
       } else {
         bcrypt.hash(req.body.password, 10, (err, hash) => {
           if (err) {
             return res.status(500).json({
-              error: err
+              success: false, err: {msg: err}
+              // error: err
             })
           } else {
             const user = new User({
@@ -32,12 +41,14 @@ router.post('/signup', (req, res, next) => {
               .save()
               .then(result => {
                 res.status(201).json({
-                  message: 'User created'
+                  success: true, data: result
+                  // message: 'User created'
                 })
               })
               .catch(err => {
                 res.status(500).json({
-                  error: err
+                  success: false, err: {msg: err}
+                  // error: err
                 })
               })
           }
@@ -46,6 +57,13 @@ router.post('/signup', (req, res, next) => {
     })
 })
 
+/* GET login page. */
+router.get('/login', function(req, res, next){
+  res.render('main', { title: 'Login', shopName: 'ThinkMobiles Test Shop',
+  page: 'logIn' })
+})
+
+/* Login existing user. */
 router.post('/login', (req, res, next) => {
   User.findOne({
       email: req.body.email
@@ -54,13 +72,15 @@ router.post('/login', (req, res, next) => {
     .then(user => {
       if (user.length < 1) {
         return res.status(401).json({
-          message: 'Auth failure'
+          success: false, err: {msg: err}
+          // message: 'Auth failure'
         })
       }
       bcrypt.compare(req.body.password, user[0].password, (err, result) => {
         if (err) {
           return res.status(401).json({
-            message: 'Auth failure'
+            success: false, err: {msg: err}
+            // message: 'Auth failure'
           })
         }
         if (result) {
@@ -74,7 +94,8 @@ router.post('/login', (req, res, next) => {
             }
           )
           return res.status(200).json({
-            message: 'Auth successful',
+            success: true, data: result,
+            // message: 'Auth successful',
             token: token
           })
         }
@@ -85,7 +106,8 @@ router.post('/login', (req, res, next) => {
     })
     .catch(err => {
       res.status(500).json({
-        error: err
+        success: false, err: {msg: err}
+        // error: err
       })
     })
 })

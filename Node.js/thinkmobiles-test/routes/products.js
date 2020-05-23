@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 const { check} = require('express-validator')
+const checkAuth = require('../middleware/checkAuth')
 
 const Product = require('../models/Product')
 
@@ -22,13 +23,13 @@ router.get('/', (req, res, next) => {
 })
 
 /* GET add product page. */
-router.get('/add', function(req, res, next){
+router.get('/add', checkAuth, function(req, res, next){
     res.render('main', { title: 'Add product', shopName: 'ThinkMobiles Test Shop',
     page: 'addProduct' })
 })
 
 /* Adding new product to DB. */
-router.post('/add', [
+router.post('/add', checkAuth, [
     check("title").isLength({
         min: 2,
         max: 30
@@ -58,7 +59,7 @@ router.post('/add', [
 })
 
 /* Get product's edit page */
-router.get('/edit/:productId', (req, res, next) => {
+router.get('/edit/:productId', checkAuth, (req, res, next) => {
     Product.findById({_id: req.params.productId})
         .exec()
         .then(product=>{
@@ -72,7 +73,7 @@ router.get('/edit/:productId', (req, res, next) => {
 })
 
 /* Edit product in DB */
-router.put('/edit/:productId', [
+router.put('/edit/:productId', checkAuth, [
     check("title").isLength({
         min: 2,
         max: 30
@@ -100,7 +101,7 @@ router.put('/edit/:productId', [
 })
 
 /* Delete product from DB. */
-router.delete('/delete/:productId', (req, res, next) => { // delete http request is better
+router.delete('/delete/:productId', checkAuth, (req, res, next) => { // delete http request is better
 // router.get('/delete/:productId', (req, res, next) => {
     Product.remove({_id: req.params.productId})
         .exec()
