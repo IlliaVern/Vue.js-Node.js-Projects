@@ -31,17 +31,14 @@ router.post('/signup', [
     .exec()
     .then(user => {
       if (user.length >= 1) {
-      // if (user !== null) { // попробовать (так понятнее)
         return res.status(409).json({
           success: false, msg: 'Email exists'
-          // message: 'Email exists'
         })
       } else {
         bcrypt.hash(req.body.password, 10, (err, hash) => {
           if (err) {
             return res.status(500).json({
               success: false, msg: err
-              // error: err
             })
           } else {
             const user = new User({
@@ -53,13 +50,11 @@ router.post('/signup', [
               .then(result => {
                 res.status(201).json({
                   success: true, msg: 'User created'
-                  // message: 'User created'
                 })
               })
               .catch(err => {
                 res.status(500).json({
                   success: false, msg: err
-                  // error: err
                 })
               })
           }
@@ -69,7 +64,6 @@ router.post('/signup', [
     .catch(err => {
       res.status(500).json({
         success: false, msg: err
-        // error: err
       })
     })
 })
@@ -91,18 +85,15 @@ router.post('/login', [
     })
     .exec()
     .then(user => {
-      // if (user.length < 1) {
-      if (user == null) { // попробовать (так понятнее)
+      if (user == null) {
         return res.status(401).json({
-          success: false, msg: "Auth failed"
-          // message: 'Auth failure'
+          success: false, msg: "Auth failure"
         })
       }
       bcrypt.compare(req.body.password, user[0].password, (err, result) => {
         if (err) {
           return res.status(401).json({
-            success: false, msg: "Auth failed"
-            // message: 'Auth failure'
+            success: false, msg: "Auth failure"
           })
         }
         if (result) {
@@ -118,20 +109,17 @@ router.post('/login', [
           localStorage.setItem('userToken', token);
           return res.status(200).json({
             success: true, msg: "Auth successful",
-            // message: 'Auth successful',
             token: token
           })
         }
         res.status(401).json({
-          success: false, msg: "Auth failed"
-          // message: 'Auth failure'
+          success: false, msg: "Auth failure"
         })
       })
     })
     .catch(err => {
       res.status(500).json({
-        success: false, msg: "Auth failed"
-        // error: err
+        success: false, msg: "Auth failure"
       })
     })
 })
