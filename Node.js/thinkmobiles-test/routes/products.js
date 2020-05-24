@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
@@ -15,7 +17,8 @@ router.get('/', (req, res, next) => {
             (products.length) > 0 ? 
             (res.render('main', { title: 'Products page', shopName: 'ThinkMobiles Test Shop',
             page: 'products', products: products }) ) : 
-            (res.status(404).json({message: 'Products not found'}))
+            (res.status(404).render('main', { title: 'Products page', shopName: 'ThinkMobiles Test Shop',
+            page: 'error', message: "Products not found" }))
         })
         .catch(err => {
             res.status(500).json({error: err})
@@ -51,10 +54,10 @@ router.post('/add', checkAuth, [
     product
         .save()
         .then(product=>{
-            res.status(201).json({success: true, data: product})
+            res.status(201).json({success: true, msg: 'Product added'})
         })
         .catch(err => {
-            res.status(500).json({success: false, err: {msg: err}})
+            res.status(500).json({success: false, msg: 'Adding failure'})
         })
 })
 
@@ -63,12 +66,12 @@ router.get('/edit/:productId', checkAuth, (req, res, next) => {
     Product.findById({_id: req.params.productId})
         .exec()
         .then(product=>{
-            res.render('main', { title: 'Product details', shopName: 'ThinkMobiles Test Shop',
+            res.render('main', { title: 'Edit product', shopName: 'ThinkMobiles Test Shop',
             page: 'editProduct', product: product })
         })
         .catch(err => {
-            res.status(500).json({error: err})
-            res.redirect('/products')
+            res.status(500).render('main', { title: 'Edit product', shopName: 'ThinkMobiles Test Shop',
+            page: 'error', message: "Product not found" })
         })
 })
 
@@ -93,21 +96,21 @@ router.put('/edit/:productId', checkAuth, [
         description: req.body.description}, {new:true})
         .exec()
         .then(product => {
-            res.status(200).json({success: true, data: product})
+            res.status(200).json({success: true, msg: 'Updated successfully'})
         })
         .catch(err => {
-            res.status(500).json({success: false, err: {msg: err}})
+            res.status(500).json({success: false, msg: 'Saving failure'})
         })
 })
 
 /* Delete product from DB. */
-router.delete('/delete/:productId', checkAuth, (req, res, next) => { // delete http request is better
-// router.get('/delete/:productId', (req, res, next) => {
-    Product.remove({_id: req.params.productId})
+router.get('/delete/:productId', checkAuth, (req, res, next) => {
+    Product.findByIdAndDelete({_id: req.params.productId})
         .exec()
         .then(res.redirect('/products'))
         .catch(err => {
-            res.status(500).json({error: err})
+            res.status(500).render('main', { title: 'Delete product', shopName: 'ThinkMobiles Test Shop',
+            page: 'error', message: "Delete failure" })
         })
 }) 
 
@@ -120,10 +123,9 @@ router.get('/details/:productId', (req, res, next) => {
             page: 'productDetails', product: product })
         })
         .catch(err => {
-            res.status(500).json({error: err})
-            res.redirect('/products')
+            res.status(500).render('main', { title: 'Product details', shopName: 'ThinkMobiles Test Shop',
+            page: 'error', message: "Product not found" })
         })
 })
-
 
 module.exports = router

@@ -1,8 +1,15 @@
+require('dotenv').config()
 const express = require('express');
 const router = express.Router();
+const { check} = require('express-validator')
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+
+if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require('node-localstorage').LocalStorage;
+  localStorage = new LocalStorage('./scratch');
+}
 
 const User = require('../models/User')
 
@@ -13,7 +20,11 @@ router.get('/signup', function(req, res, next){
 })
 
 /* Registering new user and adding to DB. */
-router.post('/signup', (req, res, next) => {
+router.post('/signup', [
+  check("email", "Please enter a valid email").isLength({ min: 8, max: 40 }),
+  check("email", "Please enter a valid email").isEmail(),
+  check("password", "Please enter a valid password").isLength({ min: 6, max: 30 })
+], (req, res, next) => {
   User.find({
       email: req.body.email
     })
@@ -22,14 +33,14 @@ router.post('/signup', (req, res, next) => {
       if (user.length >= 1) {
       // if (user !== null) { // попробовать (так понятнее)
         return res.status(409).json({
-          success: false, err: {msg: err}
+          success: false, msg: 'Email exists'
           // message: 'Email exists'
         })
       } else {
         bcrypt.hash(req.body.password, 10, (err, hash) => {
           if (err) {
             return res.status(500).json({
-              success: false, err: {msg: err}
+              success: false, msg: err
               // error: err
             })
           } else {
@@ -41,19 +52,25 @@ router.post('/signup', (req, res, next) => {
               .save()
               .then(result => {
                 res.status(201).json({
-                  success: true, data: result
+                  success: true, msg: 'User created'
                   // message: 'User created'
                 })
               })
               .catch(err => {
                 res.status(500).json({
-                  success: false, err: {msg: err}
+                  success: false, msg: err
                   // error: err
                 })
               })
           }
         })
       }
+    })
+    .catch(err => {
+      res.status(500).json({
+        success: false, msg: err
+        // error: err
+      })
     })
 })
 
@@ -64,22 +81,27 @@ router.get('/login', function(req, res, next){
 })
 
 /* Login existing user. */
-router.post('/login', (req, res, next) => {
-  User.findOne({
+router.post('/login', [
+  check("email", "Please enter a valid email").isLength({ min: 8, max: 40 }),
+  check("email", "Please enter a valid email").isEmail(),
+  check("password", "Please enter a valid password").isLength({ min: 6, max: 30 })
+], (req, res, next) => {
+  User.find({
       email: req.body.email
     })
     .exec()
     .then(user => {
-      if (user.length < 1) {
+      // if (user.length < 1) {
+      if (user == null) { // попробовать (так понятнее)
         return res.status(401).json({
-          success: false, err: {msg: err}
+          success: false, msg: "Auth failed"
           // message: 'Auth failure'
         })
       }
       bcrypt.compare(req.body.password, user[0].password, (err, result) => {
         if (err) {
           return res.status(401).json({
-            success: false, err: {msg: err}
+            success: false, msg: "Auth failed"
             // message: 'Auth failure'
           })
         }
@@ -93,23 +115,32 @@ router.post('/login', (req, res, next) => {
               expiresIn: '1h'
             }
           )
+          localStorage.setItem('userToken', token);
           return res.status(200).json({
-            success: true, data: result,
+            success: true, msg: "Auth successful",
             // message: 'Auth successful',
             token: token
           })
         }
         res.status(401).json({
-          message: 'Auth failure'
+          success: false, msg: "Auth failed"
+          // message: 'Auth failure'
         })
       })
     })
     .catch(err => {
       res.status(500).json({
-        success: false, err: {msg: err}
+        success: false, msg: "Auth failed"
         // error: err
       })
     })
+})
+
+//Get Log out
+router.get('/logout', function(req, res, next){
+  localStorage.removeItem('userToken')
+  res.render('main', { title: 'Login', shopName: 'ThinkMobiles Test Shop',
+  page: 'logIn' })
 })
 
 

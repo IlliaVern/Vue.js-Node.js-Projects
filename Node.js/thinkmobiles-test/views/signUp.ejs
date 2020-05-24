@@ -1,9 +1,9 @@
 <form method="post">
     <label>
-        Email <input type="email" maxlength="40" name="email">
+        Email <input type="email" minlength="8" maxlength="40" name="email">
     </label><br>
     <label>
-        Password <input type="password" maxlength="30" name="password">
+        Password <input type="password" minlength="6" maxlength="30" name="password">
     </label><br>
     <input type="submit" value="Sign Up">
 </form>
@@ -40,7 +40,7 @@ function onSubmit(event) {
         document.getElementById('msg').innerText = data.msg
       }
     else
-        document.getElementById('msg').innerText = data.err.msg
+        document.getElementById('msg').innerText = data.msg
   });
 }
 
