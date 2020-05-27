@@ -15,9 +15,9 @@ router.get('/', (req, res, next) => {
         .exec()
         .then(products=>{
             (products.length) > 0 ? 
-            (res.render('main', { title: 'Products page', shopName: 'ThinkMobiles Test Shop',
+            (res.render('main', { title: 'Products page', shopName: 'CRUD Test Shop',
             page: 'products', products: products }) ) : 
-            (res.status(404).render('main', { title: 'Products page', shopName: 'ThinkMobiles Test Shop',
+            (res.status(404).render('main', { title: 'Products page', shopName: 'CRUD Test Shop',
             page: 'error', message: "Products not found" }))
         })
         .catch(err => {
@@ -27,7 +27,7 @@ router.get('/', (req, res, next) => {
 
 /* GET add product page. */
 router.get('/add', checkAuth, function(req, res, next){
-    res.render('main', { title: 'Add product', shopName: 'ThinkMobiles Test Shop',
+    res.render('main', { title: 'Add product', shopName: 'CRUD Test Shop',
     page: 'addProduct' })
 })
 
@@ -66,11 +66,11 @@ router.get('/edit/:productId', checkAuth, (req, res, next) => {
     Product.findById({_id: req.params.productId})
         .exec()
         .then(product=>{
-            res.render('main', { title: 'Edit product', shopName: 'ThinkMobiles Test Shop',
+            res.render('main', { title: 'Edit product', shopName: 'CRUD Test Shop',
             page: 'editProduct', product: product })
         })
         .catch(err => {
-            res.status(500).render('main', { title: 'Edit product', shopName: 'ThinkMobiles Test Shop',
+            res.status(500).render('main', { title: 'Edit product', shopName: 'CRUD Test Shop',
             page: 'error', message: "Product not found" })
         })
 })
@@ -109,7 +109,7 @@ router.get('/delete/:productId', checkAuth, (req, res, next) => {
         .exec()
         .then(res.redirect('/products'))
         .catch(err => {
-            res.status(500).render('main', { title: 'Delete product', shopName: 'ThinkMobiles Test Shop',
+            res.status(500).render('main', { title: 'Delete product', shopName: 'CRUD Test Shop',
             page: 'error', message: "Delete failure" })
         })
 }) 
@@ -119,11 +119,11 @@ router.get('/details/:productId', (req, res, next) => {
     Product.findById({_id: req.params.productId})
         .exec()
         .then(product => {
-            res.render('main', { title: 'Product details', shopName: 'ThinkMobiles Test Shop',
+            res.render('main', { title: 'Product details', shopName: 'CRUD Test Shop',
             page: 'productDetails', product: product })
         })
         .catch(err => {
-            res.status(500).render('main', { title: 'Product details', shopName: 'ThinkMobiles Test Shop',
+            res.status(500).render('main', { title: 'Product details', shopName: 'CRUD Test Shop',
             page: 'error', message: "Product not found" })
         })
 })

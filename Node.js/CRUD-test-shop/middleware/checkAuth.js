@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
         jwt.verify(userToken, process.env.JWT_KEY)
         next()
     } catch (error) {
-        return res.status(401).render('main', { title: 'Unauthorized action', shopName: 'ThinkMobiles Test Shop',
+        return res.status(401).render('main', { title: 'Unauthorized action', shopName: 'CRUD Test Shop',
         page: 'error', message: "Unauthorized" })
     }
 }

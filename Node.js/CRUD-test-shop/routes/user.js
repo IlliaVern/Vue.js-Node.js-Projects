@@ -15,7 +15,7 @@ const User = require('../models/User')
 
 /* GET signup page. */
 router.get('/signup', function(req, res, next){
-  res.render('main', { title: 'Signup', shopName: 'ThinkMobiles Test Shop',
+  res.render('main', { title: 'Signup', shopName: 'CRUD Test Shop',
   page: 'signUp' })
 })
 
@@ -70,7 +70,7 @@ router.post('/signup', [
 
 /* GET login page. */
 router.get('/login', function(req, res, next){
-  res.render('main', { title: 'Login', shopName: 'ThinkMobiles Test Shop',
+  res.render('main', { title: 'Login', shopName: 'CRUD Test Shop',
   page: 'logIn' })
 })
 
@@ -127,7 +127,7 @@ router.post('/login', [
 //Get Log out
 router.get('/logout', function(req, res, next){
   localStorage.removeItem('userToken')
-  res.render('main', { title: 'Login', shopName: 'ThinkMobiles Test Shop',
+  res.render('main', { title: 'Login', shopName: 'CRUD Test Shop',
   page: 'logIn' })
 })
 
