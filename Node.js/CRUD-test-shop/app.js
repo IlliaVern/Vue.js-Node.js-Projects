@@ -1,16 +1,16 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const mongoose = require('mongoose')
-var dotenv = require('dotenv').config()
+require('dotenv').config()
 
-var indexRouter = require('./routes/index');
-var userRouter = require('./routes/user');
-var productsRouter = require('./routes/products');
+const indexRouter = require('./routes/index');
+const userRouter = require('./routes/user');
+const productsRouter = require('./routes/products');
 
-var app = express();
+const app = express();
 
 const bodyParser = require('body-parser')
 const urlencodedParser = bodyParser.urlencoded({extended: false})
@@ -37,7 +37,7 @@ app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/products', productsRouter);
 
-var url = process.env.MONGODB_URI
+const url = process.env.MONGODB_URI
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 
 
