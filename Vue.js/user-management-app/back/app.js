@@ -1,4 +1,3 @@
-// const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -6,21 +5,17 @@ const logger = require('morgan');
 const mongoose = require('mongoose')
 require('dotenv').config()
 
-// var indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
 
-const url = process.env.MONGODB_URI
+const url = "mongodb+srv://management-app-user:BUQtHjZdGCVSrit3@user-management-crud-gqu4p.mongodb.net/usersDB?retryWrites=true&w=majority"
+// const url = process.env.MONGODB_URI   // показал доступ к базе так 
+// //  как иначе лоокально подключаться не будет к базе если сказать репозиторий с GitHub
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 
 const bodyParser = require('body-parser')
 const urlencodedParser = bodyParser.urlencoded({extended: false})
-
-
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -43,7 +38,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use('/', indexRouter);
 app.use('/', usersRouter);
 
 app.use((req, res, next) => {
