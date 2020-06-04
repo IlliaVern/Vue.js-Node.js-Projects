@@ -26,10 +26,8 @@ export default {
                 .get(apiEndpoints.users.read)
                 .then((res)=>res.data)
                 .then((resData)=>{
-                    resData.success ? commit("setUsersList", resData.data)
-                    : new Error( "Fetch failed :(" )
-                    // if(resData.success) commit("setUsersList", resData.data)
-                    // else throw new Error("Fetch failed :(")
+                    if(resData.success) commit("setUsersList", resData.data)
+                    else throw new Error("Fetch failed :(")
                 })
                 .catch((err)=>console.log(err))
                 .finally(()=>commit("setLoading", false))
@@ -41,8 +39,6 @@ export default {
                 .post(apiEndpoints.users.add, user)
                 .then((res)=>res.data)
                 .then((resData)=>{
-                    // resData.success ? commit("addUserToList", resData.data)
-                    // : new Error("Fetch failed :(")
                     if(resData.success) commit("addUserToList", resData.data)
                     else throw new Error("Fetch failed :(")
                 })
@@ -56,8 +52,6 @@ export default {
                 .delete(apiEndpoints.users.delete, {data:{id}})
                 .then((res)=>res.data)
                 .then((resData)=>{
-                    // resData.success ? dispatch("loadUsersList")
-                    // : new Error("Fetch failed :(")
                     if(resData.success) dispatch("loadUsersList")
                     else throw new Error("Fetch failed :(")
                 })
@@ -71,8 +65,6 @@ export default {
                 .put(apiEndpoints.users.update(user._id), user)
                 .then(res=>res.data)
                 .then(resData=>{
-                    // resData.success ? dispatch("loadUsersList")
-                    // : new Error("Fetch failed :(")
                     if(resData.success) dispatch("loadUsersList")
                     else throw new Error("Fetch failed :(")
                 })
@@ -88,8 +80,6 @@ export default {
                 .then (resData=>{
                     if(resData.success) commit("setUserToUpdate", resData.data)
                     else throw new Error("Fetch failed :(")
-                    // resData.success ? commit("setUserToUpdate", resData.data)
-                    // : new Error("Fetch failed :(")
                 })
                 .catch(err=>console.log(err))
                 .finally(()=>commit("setLoading", false))

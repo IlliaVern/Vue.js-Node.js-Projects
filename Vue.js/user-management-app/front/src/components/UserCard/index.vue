@@ -8,8 +8,8 @@
           <b-card-sub-title class="mb-2"><b-icon-phone />{{user.phoneNumber}}</b-card-sub-title>
           <b-card-text><b-icon-house-door />{{user.address}}</b-card-text>
           <b-button-group class="mx-1">
-            <b-button variant="info" v-b-tooltip.hover title="Edit user" :to="`users/${user._id}`">Edit</b-button>
-            <b-button variant="danger" v-b-tooltip.hover title="Delete user" @click="deleteUser(user._id)">Delete</b-button>
+            <b-button variant="outline-primary" v-b-tooltip.hover title="Edit user" :to="`users/${user._id}`">Edit</b-button>
+            <b-button variant="outline-danger" v-b-tooltip.hover title="Delete user" @click="deleteUser(user._id)">Delete</b-button>
           </b-button-group>
         </b-card-body>
       </b-card>

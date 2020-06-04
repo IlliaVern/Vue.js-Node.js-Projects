@@ -25,8 +25,8 @@
         <b-form-input id="input-5" v-model="address" type="text" required placeholder="Enter user address"></b-form-input>
       </b-form-group>
 
-      <b-button variant="primary" :disabled="!isDataValid" @click="saveUser">{{ saveBtnTitle }}</b-button>
-      <b-button variant="danger" @click="onCancel">Cancel</b-button>
+      <b-button variant="outline-success" :disabled="!isDataValid" @click="saveUser">{{ saveBtnTitle }}</b-button>
+      <b-button variant="outline-danger" @click="onCancel">Cancel</b-button>
     </b-form>
   </div>
 </template>
