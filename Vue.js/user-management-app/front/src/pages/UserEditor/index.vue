@@ -1,8 +1,10 @@
 <template>
   <div>
     <h3>User Editor</h3>
-    <!-- @submit="onSubmit" @reset="onReset" v-if="show" -->
     <b-form >
+      <div class="text-center" v-if="isLoading">
+        <b-spinner variant="primary"></b-spinner>
+      </div>
       <b-form-group id="input-group-1" label="User first name:" label-for="input-1">
         <b-form-input id="input-1" v-model="firstName" required placeholder="Enter first name"></b-form-input>
       </b-form-group>
@@ -30,7 +32,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 export default {
   name: "UserEditor",
   data() {
@@ -43,6 +45,7 @@ export default {
       }
   },
   computed: {
+      ...mapGetters("users", ["getUserToUpdate", "isLoading"]),
 
       userId() {
           return this.$route.params.userId 
@@ -52,6 +55,18 @@ export default {
       },
       saveBtnTitle() {
           return this.userId ? "Save" : "Add"
+      }
+  },
+  watch: {
+      isLoading(newValue) {
+        if (!newValue) {
+          const userToUpdate = this.getUserToUpdate
+            this.firstName = userToUpdate.firstName,
+            this.lastName = userToUpdate.lastName,
+            this.email = userToUpdate.email,
+            this.phoneNumber = userToUpdate.phoneNumber,
+            this.address = userToUpdate.address
+        }
       }
   },
   methods: {
@@ -81,15 +96,10 @@ export default {
           this.$router.push({path: "/users"})
       }
   },
-  async created() {
+  created() {
       if (this.userId) {
-          await this.findUserById(this.userId)
-          const userToUpdate = await this.getUserToUpdate
-          this.firstName = userToUpdate.firstName,
-          this.lastName = userToUpdate.lastName,
-          this.email = userToUpdate.email,
-          this.phoneNumber = userToUpdate.phoneNumber,
-          this.address = userToUpdate.address
+          this.findUserById(this.userId)
+          
           }
   }
 };

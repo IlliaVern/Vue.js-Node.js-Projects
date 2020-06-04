@@ -51,7 +51,7 @@ router.get('/users/:id', (req, res, next) => {
 
 //Updating previously founded user info in DB
 router.put('/users/:id', (req, res, next) => {
-    User.findByIdAndUpdate({_id: req.params.productId}, {
+    User.findByIdAndUpdate({_id: req.params.id}, {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,

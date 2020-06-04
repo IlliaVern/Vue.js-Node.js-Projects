@@ -1,13 +1,13 @@
 <template>
     <div>
         <h3>Users Viewer</h3>
-        <!-- <b-card-group> можна спробувати і так -->
         <b-container>
+        <!-- <b-card-group deck> -->
             <b-row align-v="center">
                 <user-card v-for="(user, userId) in getUsersList" :key="userId" :user="user" />
             </b-row>
-        </b-container>
         <!-- </b-card-group> -->
+        </b-container>
     </div>
 </template>
 
